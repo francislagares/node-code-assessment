@@ -1,0 +1,15 @@
+# baseURL
+@baseURL = http://localhost:4000
+
+###
+# Get All Policies
+GET {{ baseURL }}/api/v1/policies
+
+###
+# Get Policy By ClientId
+POST {{ baseURL }}/api/v1/policies/query?clientId=e8fd159b-57c4-4d36-9bd7-a59ca13057bb
+
+
+###
+# Get Client By Policy Number
+POST {{baseURL}}/api/v1/policies/query?policyId=e8fd159b-57c4-4d36-9bd7-a59ca13057bb

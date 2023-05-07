@@ -12,7 +12,9 @@
     "build:tsc": "tsc && tsc-alias",
     "build:clean": "rimraf dist; exit 0",
     "prisma:init": "prisma init",
-    "prisma:migrate": "prisma migrate dev --preview-feature",
+    "prisma:push": "dotenv -e .env.development.local -- npx prisma db push",
+    "prisma:migrate": "dotenv -e .env.development.local -- npx prisma migrate dev --name init ",
+    "prisma:seed": "dotenv -e .env.development.local -- npx prisma db seed",
     "prisma:generate": "prisma generate",
     "test": "TS_JEST_DISABLE_VER_CHECKER=true && jest --runInBand --watchAll --no-cache",
     "test:ci": "TS_JEST_DISABLE_VER_CHECKER=true && jest --runInBand",
@@ -21,7 +23,8 @@
     "format": "prettier --ignore-path .gitignore \"src/**/*.+(ts|js|tsx|json|md)\" --write"
   },
   "prisma": {
-    "schema": "src/prisma/schema.prisma"
+    "schema": "src/prisma/schema.prisma",
+    "seed": "ts-node --transpile-only src/prisma/seed.ts"
   },
   "dependencies": {
     "@prisma/client": "^4.13.0",
@@ -39,6 +42,7 @@
     "hpp": "^0.2.3",
     "http-status-codes": "^2.2.0",
     "jsonwebtoken": "^9.0.0",
+    "mongodb": "^5.4.0",
     "prisma": "^4.13.0",
     "winston": "^3.8.2"
   },
@@ -64,6 +68,7 @@
     "commitizen": "^4.3.0",
     "cross-env": "^7.0.3",
     "cz-conventional-changelog": "^3.3.0",
+    "dotenv-cli": "^7.2.1",
     "eslint": "^8.40.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^8.8.0",

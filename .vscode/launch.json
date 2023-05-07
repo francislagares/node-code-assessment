@@ -4,21 +4,19 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Debug Current File",
-      "skipFiles": [
-        "<node_internals>/**"
+      "name": "Debug Node Assessment",
+      "args": ["${workspaceFolder}/src/server.ts"],
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register",
+        "-r",
+        "tsconfig-paths/register"
       ],
-      "program": "${file}",
-      "preLaunchTask": "build",
+      "sourceMaps": true,
+      "envFile": "${workspaceFolder}/.env",
+      "cwd": "${workspaceRoot}",
       "console": "integratedTerminal",
-      "outFiles": [
-        "${workspaceFolder}/build/**/*.js"
-      ],
-      "env": { "NODE_ENV": "development" },
-      "resolveSourceMapLocations": [
-        "${workspaceFolder}/**",
-        "!**/node_modules/**"
-      ],
     }
   ]
 }
