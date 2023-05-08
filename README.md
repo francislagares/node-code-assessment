@@ -56,7 +56,9 @@ Run the Project
   yarn test
   ```
 
-  Open with Postman or an API Client of your choice the endpoint [http://localhost:4000/api/v1](http://localhost:4000/api/v1) 
+  You can check the published docs API:
+  [nodejs-assessment 
+](https://documenter.getpostman.com/view/5824035/2s93eYUBzY)
 
 # Author
 
