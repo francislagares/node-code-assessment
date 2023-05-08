@@ -30,7 +30,7 @@ model Policy {
   inceptionDate      String
   installmentPayment Boolean
 
-  client   Client @relation(fields: [clientId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  client   Client @relation(fields: [clientId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   clientId String @default(uuid())
 }
 

@@ -5,10 +5,12 @@ import { policies } from './policies';
 const prisma = new PrismaClient();
 
 async function main() {
+  await prisma.client.deleteMany({});
   await prisma.client.createMany({
     data: clients,
   });
 
+  await prisma.policy.deleteMany({});
   await prisma.policy.createMany({
     data: policies,
   });
