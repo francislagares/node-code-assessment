@@ -6,7 +6,7 @@
   "author": "Francis Lagares",
   "license": "MIT",
   "scripts": {
-    "start:dev": "yarn prisma:generate && cross-env NODE_ENV=development && nodemon",
+    "start:dev": "yarn prisma:generate && yarn prisma:seed cross-env NODE_ENV=development && nodemon",
     "start": "yarn build && cross-env NODE_ENV=production && node dist/server.js",
     "build": "yarn build:clean && yarn build:tsc",
     "build:tsc": "tsc && tsc-alias",
