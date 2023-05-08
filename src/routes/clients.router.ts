@@ -1,6 +1,7 @@
 import express, { Router } from 'express';
 
 import ClientsController from '@/controllers/clients.controller';
+import authMiddleware from '@/middlewares/auth.middleware';
 
 export class ClientRoutes {
   private router: Router;
@@ -12,9 +13,13 @@ export class ClientRoutes {
   public getRoutes(): Router {
     const controller = new ClientsController();
 
-    this.router.get('/clients', controller.getClients);
-    this.router.get('/clients/:id', controller.getClientById);
-    this.router.post('/clients/query', controller.getClientByName);
+    this.router.get('/clients', authMiddleware, controller.getClients);
+    this.router.get('/clients/:id', authMiddleware, controller.getClientById);
+    this.router.post(
+      '/clients/query',
+      authMiddleware,
+      controller.getClientByName,
+    );
 
     return this.router;
   }

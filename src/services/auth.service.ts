@@ -1,12 +1,11 @@
-import { DataStoredInToken, TokenData } from '@/dtos/auth.interface';
+import { DataStoredInToken, TokenData } from '@/interfaces/auth.interface';
 import { PrismaClient, User } from '@prisma/client';
 import { compare, hash } from 'bcrypt';
 
+import { JWT_SECRET } from '@/config/environment';
 import { CreateUserDto } from '@/dtos/users.dto';
 import { HttpException } from '@/exceptions/httpException';
 import { sign } from 'jsonwebtoken';
-
-const SECRET_KEY = process.env.SECRET_KEY;
 
 class AuthService {
   public users = new PrismaClient().user;
@@ -59,7 +58,7 @@ class AuthService {
 
   public createToken(user: User): TokenData {
     const dataStoredInToken: DataStoredInToken = { id: user.id };
-    const secretKey: string = SECRET_KEY;
+    const secretKey: string = JWT_SECRET;
     const expiresIn: number = 60 * 60;
 
     return {

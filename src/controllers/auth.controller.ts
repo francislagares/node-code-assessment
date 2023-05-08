@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
 
-import { RequestWithUser } from '@/dtos/auth.interface';
-import { CreateUserDto } from '@/dtos/users.dto';
 import AuthService from '@/services/auth.service';
+import { CreateUserDto } from '@/dtos/users.dto';
+import { RequestWithUser } from '@/interfaces/auth.interface';
 import { User } from '@prisma/client';
 import { validate } from 'class-validator';
 

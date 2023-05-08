@@ -1,8 +1,11 @@
-import { DataStoredInToken, RequestWithUser } from '@/dtos/auth.interface';
+import {
+  DataStoredInToken,
+  RequestWithUser,
+} from '@/interfaces/auth.interface';
 import { NextFunction, Response } from 'express';
 
-import { HttpException } from '@/exceptions/httpException';
 import { JWT_SECRET } from '@/config/environment';
+import { HttpException } from '@/exceptions/httpException';
 import { PrismaClient } from '@prisma/client';
 import { verify } from 'jsonwebtoken';
 

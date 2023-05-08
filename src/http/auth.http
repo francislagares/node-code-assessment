@@ -8,7 +8,7 @@ Content-Type: application/json
 
 {
   "name": "Admin",
-  "email": "charli@gmail.com",
+  "email": "john@gmail.com",
   "password": "password",
   "role": "ADMIN"
 }
@@ -19,7 +19,7 @@ POST {{ baseURL }}/api/v1/login
 Content-Type: application/json
 
 {
-  "email": "francis@gmail.com",
+  "email": "john@gmail.com",
   "password": "password"
 }
 

@@ -1,6 +1,7 @@
 import express, { Router } from 'express';
 
 import PoliciesController from '@/controllers/policies.controller';
+import authMiddleware from '@/middlewares/auth.middleware';
 
 export class PoliciesRoutes {
   private router: Router;
@@ -12,8 +13,12 @@ export class PoliciesRoutes {
   public getRoutes(): Router {
     const controller = new PoliciesController();
 
-    this.router.get('/policies', controller.getPolicies);
-    this.router.post('/policies/query', controller.getPolicyByClientName);
+    this.router.get('/policies', authMiddleware, controller.getPolicies);
+    this.router.post(
+      '/policies/query',
+      authMiddleware,
+      controller.getPolicyByClientName,
+    );
     // this.router.post('/policies/query', controller.getPolicyByClientId);
 
     return this.router;
