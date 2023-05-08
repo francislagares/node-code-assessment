@@ -25,13 +25,13 @@ model Client {
 
 model Policy {
   id                 String  @id @default(uuid()) @map("_id")
-  amountInsured      Int
+  amountInsured      Float
   email              String
   inceptionDate      String
   installmentPayment Boolean
 
   client   Client @relation(fields: [clientId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  clientId String
+  clientId String @default(uuid())
 }
 
 enum Role {
