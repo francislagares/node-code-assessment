@@ -16,15 +16,7 @@ class ClientsService {
 
   public getClientById = async (id: string): Promise<Client | null> => {
     try {
-      const response = await axios.get(CLIENTS_COMPANY_API);
-
-      const { clients } = response.data;
-
-      const filteredClient: Client = clients.filter(
-        (client: Client) => client.id === id,
-      );
-
-      return filteredClient;
+      return this.filterClients((client: Client) => client.id === id);
     } catch (e) {
       throw new Error(e.message);
     }
@@ -32,18 +24,32 @@ class ClientsService {
 
   public getClientByName = async (name: string): Promise<Client | null> => {
     try {
+      return this.filterClients((client: Client) => client.name === name);
+    } catch (e) {
+      throw new Error(e.message);
+    }
+  };
+
+  private fetchClients = async (): Promise<Client[]> => {
+    try {
       const response = await axios.get(CLIENTS_COMPANY_API);
 
       const { clients } = response.data;
 
-      const filteredClient = clients.filter(
-        (client: Client) => client.name === name,
-      );
-
-      return filteredClient;
+      return clients;
     } catch (e) {
       throw new Error(e.message);
     }
+  };
+
+  private filterClients = async (
+    filterFn: (client: Client) => boolean,
+  ): Promise<Client | null> => {
+    const clients = await this.fetchClients();
+
+    const filteredClient = clients.find(filterFn);
+
+    return filteredClient || null;
   };
 }
 
