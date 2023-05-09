@@ -2,6 +2,7 @@ import express, { Router } from 'express';
 
 import ClientsController from '@/controllers/clients.controller';
 import authMiddleware from '@/middlewares/auth.middleware';
+import { hasRole } from '@/middlewares/role.middleware';
 
 export class ClientRoutes {
   private router: Router;
@@ -13,11 +14,22 @@ export class ClientRoutes {
   public getRoutes(): Router {
     const controller = new ClientsController();
 
-    this.router.get('/clients', authMiddleware, controller.getClients);
-    this.router.get('/clients/:id', authMiddleware, controller.getClientById);
+    this.router.get(
+      '/clients',
+      authMiddleware,
+      hasRole('USER', 'ADMIN'),
+      controller.getClients,
+    );
+    this.router.get(
+      '/clients/:id',
+      authMiddleware,
+      hasRole('USER', 'ADMIN'),
+      controller.getClientById,
+    );
     this.router.post(
       '/clients/query',
       authMiddleware,
+      hasRole('USER', 'ADMIN'),
       controller.getClientByName,
     );
 
