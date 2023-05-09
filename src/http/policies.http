@@ -6,8 +6,8 @@
 GET {{ baseURL }}/api/v1/policies
 
 ###
-# Get Policy By ClientId
-POST {{ baseURL }}/api/v1/policies/query?clientId=e8fd159b-57c4-4d36-9bd7-a59ca13057bb
+# Get Policy By Client Name
+POST {{ baseURL }}/api/v1/policies/query?clientName=Barnett
 
 
 ###

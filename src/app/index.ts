@@ -1,4 +1,3 @@
-import { Application, json, urlencoded } from 'express';
 import {
   CLIENT_URL,
   CREDENTIALS,
@@ -6,16 +5,17 @@ import {
   ORIGIN,
   PORT,
 } from '@/config/environment';
+import { Application, json, urlencoded } from 'express';
 
+import { MongoDBInstance as dbConnection } from '@/config/database';
 import { ErrorMiddleware } from '@/middlewares/error.middleware';
 import applicationRoutes from '@/routes/index';
+import logger from '@/utils/logger';
 import compression from 'compression';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
-import { MongoDBInstance as dbConnection } from '@/config/database';
 import helmet from 'helmet';
 import hpp from 'hpp';
-import logger from '@/utils/logger';
 import swaggerJSDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 
