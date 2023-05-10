@@ -1,20 +1,16 @@
-import { PrismaClient, Role } from '@prisma/client';
+import { Role } from '@prisma/client';
 import { NextFunction, Request, Response } from 'express';
 
 import { HttpException } from '@/exceptions/httpException';
-
-const prisma = new PrismaClient();
+import { PrismaAuthRepository } from '@/repositories/auth-prisma.repository';
 
 export const hasRole = (...allowedRoles: Role[]) => {
   return async (req: Request, res: Response, next: NextFunction) => {
     try {
       const { user } = req;
 
-      const userData = await prisma.user.findUnique({
-        where: {
-          id: user.id,
-        },
-      });
+      const authRepository = new PrismaAuthRepository();
+      const userData = await authRepository.getUserById(user.id);
 
       if (!allowedRoles.includes(userData.role)) {
         return next(

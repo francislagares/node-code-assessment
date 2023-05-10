@@ -1,13 +1,23 @@
 import { PrismaClient, User } from '@prisma/client';
 
-import { CreateUserDto } from '@/dtos/users.dto';
 import { AuthRepository } from '@/interfaces/auth.repository';
+import { CreateUserDto } from '@/dtos/users.dto';
 
 export class PrismaAuthRepository implements AuthRepository {
   private readonly prisma: PrismaClient;
 
   constructor() {
     this.prisma = new PrismaClient();
+  }
+
+  public async getUserById(id: string): Promise<User> {
+    try {
+      return await this.prisma.user.findUnique({
+        where: { id },
+      });
+    } catch (e) {
+      throw new Error(e.message);
+    }
   }
 
   public async getUserByEmail(email: string): Promise<User> {

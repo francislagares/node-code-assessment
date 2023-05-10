@@ -6,7 +6,7 @@ import { NextFunction, Response } from 'express';
 
 import { JWT_SECRET } from '@/config/environment';
 import { HttpException } from '@/exceptions/httpException';
-import { PrismaClient } from '@prisma/client';
+import { PrismaAuthRepository } from '@/repositories/auth-prisma.repository';
 import { verify } from 'jsonwebtoken';
 
 const authMiddleware = async (
@@ -29,8 +29,8 @@ const authMiddleware = async (
       ) as DataStoredInToken;
       const userId = verificationResponse.id;
 
-      const users = new PrismaClient().user;
-      const findUser = await users.findUnique({ where: { id: userId } });
+      const authRepository = new PrismaAuthRepository();
+      const findUser = await authRepository.getUserById(userId);
 
       if (findUser) {
         req.user = findUser;
