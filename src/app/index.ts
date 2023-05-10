@@ -86,7 +86,7 @@ export class App {
         info: {
           title: 'API Documentation',
           version: '1.0.0',
-          description: 'Example docs',
+          description: 'REST API docs',
         },
         servers: [
           {

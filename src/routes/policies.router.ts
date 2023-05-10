@@ -27,7 +27,7 @@ export class PoliciesRoutes {
       controller.getPolicyByClientName,
     );
     this.router.post(
-      '/policies/query',
+      '/policies/search',
       authMiddleware,
       hasRole('ADMIN'),
       controller.getClientByPolicyId,

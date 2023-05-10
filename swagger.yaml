@@ -148,7 +148,7 @@ paths:
           description: 'Server Error'
 
 # [POST] policies/query
-  /policies/query/:
+  /policies/query:
     post:
       tags:
       - policies
@@ -170,7 +170,7 @@ paths:
         500:
           description: 'Server Error'
 # [POST] policies/query
-  /policies/query:
+  /policies/search:
     post:
       tags:
       - policies

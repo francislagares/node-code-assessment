@@ -24,7 +24,7 @@ class PoliciesController {
       const policies: Policy[] | null =
         await this.policiesService.getPolicyByClientName(clientName);
 
-      res.status(200).json({ policies });
+      res.status(200).json(policies);
 
       return policies;
     },
@@ -32,11 +32,11 @@ class PoliciesController {
 
   public getClientByPolicyId = asyncMiddleware(
     async (req: Request, res: Response): Promise<Client | null> => {
-      const { policyId } = req.params;
+      const policyId = req.query.policyId as string;
       const client: Client | null =
         await this.policiesService.getClientByPolicyId(policyId);
 
-      res.status(200).json({ client });
+      res.status(200).json({ policyNumber: client });
 
       return client;
     },

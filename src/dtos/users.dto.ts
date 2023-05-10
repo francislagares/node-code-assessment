@@ -19,3 +19,13 @@ export class CreateUserDto {
   @IsNotEmpty()
   role: Role;
 }
+
+export class LoginUserDto {
+  @IsEmail()
+  @IsNotEmpty()
+  email: string;
+
+  @IsString()
+  @IsNotEmpty()
+  password: string;
+}

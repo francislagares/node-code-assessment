@@ -1,10 +1,10 @@
+import { CreateUserDto, LoginUserDto } from '@/dtos/users.dto';
 import { DataStoredInToken, TokenData } from '@/interfaces/auth.interface';
 import { PrismaClient, User } from '@prisma/client';
 import { compare, hash } from 'bcrypt';
 
-import { JWT_SECRET } from '@/config/environment';
-import { CreateUserDto } from '@/dtos/users.dto';
 import { HttpException } from '@/exceptions/httpException';
+import { JWT_SECRET } from '@/config/environment';
 import { sign } from 'jsonwebtoken';
 
 class AuthService {
@@ -26,7 +26,7 @@ class AuthService {
   }
 
   public async login(
-    data: CreateUserDto,
+    data: LoginUserDto,
   ): Promise<{ cookie: string; findUser: User }> {
     const findUser: User = await this.users.findUnique({
       where: { email: data.email },

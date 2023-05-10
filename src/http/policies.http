@@ -7,9 +7,9 @@ GET {{ baseURL }}/api/v1/policies
 
 ###
 # Get Policy By Client Name
-POST {{ baseURL }}/api/v1/policies/query?clientName=Barnett
+POST {{ baseURL }}/api/v1/policies/query?clientName=Manning
 
 
 ###
 # Get Client By Policy Number
-POST {{baseURL}}/api/v1/policies/query?policyId=e8fd159b-57c4-4d36-9bd7-a59ca13057bb
+POST {{baseURL}}/api/v1/policies/search?policyId=0d4bc5cf-4677-4876-bad3-c7064ebaf3b2git 
