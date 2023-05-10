@@ -1,6 +1,8 @@
 import {
+  BASE_URL,
   CLIENT_URL,
   CREDENTIALS,
+  HOST,
   NODE_ENV,
   ORIGIN,
   PORT,
@@ -86,11 +88,18 @@ export class App {
           version: '1.0.0',
           description: 'Example docs',
         },
+        servers: [
+          {
+            url: `${HOST}:${PORT}${BASE_URL}`,
+          },
+        ],
       },
       apis: ['./swagger.yaml'],
     };
 
     const swaggerSpecs = swaggerJSDoc(options);
     this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
+
+    logger.info(`Docs are available at ${HOST}:${PORT}/api-docs`);
   }
 }

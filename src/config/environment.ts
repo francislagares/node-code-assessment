@@ -4,6 +4,7 @@ config({ path: `.env.${process.env.NODE_ENV || 'development'}.local` });
 export const CREDENTIALS = process.env.CREDENTIALS === 'true';
 export const {
   NODE_ENV,
+  HOST,
   PORT,
   BASE_URL,
   CLIENT_URL,
