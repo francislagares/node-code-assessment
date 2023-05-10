@@ -1,36 +1,35 @@
 import { CreateUserDto, LoginUserDto } from '@/dtos/users.dto';
 import { DataStoredInToken, TokenData } from '@/interfaces/auth.interface';
-import { PrismaClient, User } from '@prisma/client';
 import { compare, hash } from 'bcrypt';
 
-import { HttpException } from '@/exceptions/httpException';
 import { JWT_SECRET } from '@/config/environment';
+import { HttpException } from '@/exceptions/httpException';
+import { PrismaAuthRepository } from '@/repositories/auth-prisma.repository';
+import { User } from '@prisma/client';
 import { sign } from 'jsonwebtoken';
 
 class AuthService {
-  public users = new PrismaClient().user;
+  authRepository = new PrismaAuthRepository();
 
   public async signup(data: CreateUserDto): Promise<User> {
-    const findUser: User = await this.users.findUnique({
-      where: { email: data.email },
-    });
+    const findUser: User = await this.authRepository.getUserByEmail(data.email);
+
     if (findUser)
       throw new HttpException(409, `This email ${data.email} already exists`);
 
     const hashedPassword = await hash(data.password, 10);
-    const createUserData: Promise<User> = this.users.create({
-      data: { ...data, password: hashedPassword },
-    });
-
+    const createUserData: Promise<User> = this.authRepository.createUser(
+      data,
+      hashedPassword,
+    );
     return createUserData;
   }
 
   public async login(
     data: LoginUserDto,
   ): Promise<{ cookie: string; findUser: User }> {
-    const findUser: User = await this.users.findUnique({
-      where: { email: data.email },
-    });
+    const findUser: User = await this.authRepository.getUserByEmail(data.email);
+
     if (!findUser)
       throw new HttpException(409, `This email ${data.email} was not found`);
 
@@ -48,9 +47,12 @@ class AuthService {
   }
 
   public async logout(data: User): Promise<User> {
-    const findUser: User = await this.users.findFirst({
-      where: { email: data.email, password: data.password },
-    });
+    const { email, password } = data;
+
+    const findUser: User = await this.authRepository.getUserByEmailAndPassword(
+      email,
+      password,
+    );
     if (!findUser) throw new HttpException(409, "User doesn't exist");
 
     return findUser;

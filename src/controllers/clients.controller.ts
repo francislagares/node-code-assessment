@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 
 import { Client } from '@/interfaces/clients.interface';
-import { asyncMiddleware } from '@/middlewares/async.middleware';
 import ClientsService from '@/services/clients.service';
+import { asyncMiddleware } from '@/middlewares/async.middleware';
 
 class ClientsController {
   clientsService = new ClientsService();

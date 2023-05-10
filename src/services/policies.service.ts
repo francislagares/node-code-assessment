@@ -1,59 +1,22 @@
 import { Policy } from '@/interfaces/policy.interface';
+import { PrismaPolicyRepository } from '@/repositories/policy-prisma.repository';
 import { ClientWithPolicyId } from '@/types/client';
-import { PrismaClient } from '@prisma/client';
 
 class PoliciesService {
-  database = new PrismaClient();
+  policiesRepository = new PrismaPolicyRepository();
 
   public getPolicies = async (): Promise<Policy[]> => {
-    try {
-      return await this.database.policy.findMany();
-    } catch (e) {
-      throw new Error(e.message);
-    }
+    return await this.policiesRepository.getPolicies();
   };
 
   public getPolicyByClientName = async (clientName: string) => {
-    try {
-      return await this.database.client.findMany({
-        where: {
-          name: clientName,
-        },
-        select: {
-          id: true,
-          name: true,
-          policy: {
-            select: {
-              id: true,
-              amountInsured: true,
-              inceptionDate: true,
-              email: true,
-              installmentPayment: true,
-              clientId: true,
-            },
-          },
-        },
-      });
-    } catch (e) {
-      throw new Error(e.message);
-    }
+    return await this.policiesRepository.getPolicyByClientName(clientName);
   };
 
   public getClientByPolicyId = async (
     policyId: string,
   ): Promise<ClientWithPolicyId | null> => {
-    try {
-      return await this.database.policy.findUnique({
-        where: {
-          id: policyId,
-        },
-        include: {
-          client: true,
-        },
-      });
-    } catch (e) {
-      throw new Error(e.message);
-    }
+    return await this.policiesRepository.getClientByPolicyId(policyId);
   };
 }
 
