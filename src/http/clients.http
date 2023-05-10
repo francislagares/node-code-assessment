@@ -2,14 +2,14 @@
 @baseURL = http://localhost:4000
 
 ###
-# Find All Users
+# Find All Clients
 GET {{ baseURL }}/api/v1/clients
 
 ###
-# Find User By Id
+# Find Client By Id
 GET {{ baseURL }}/api/v1/clients/e8fd159b-57c4-4d36-9bd7-a59ca13057bb
 
 
 ###
-# Find User By Name
+# Find Client By Name
 POST {{baseURL}}/api/v1/clients/query?name=Barnett

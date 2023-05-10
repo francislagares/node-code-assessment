@@ -2,5 +2,5 @@
 @baseURL = http://localhost:4000
 
 ###
-# Find All Users
+# Healthcheck
 GET {{ baseURL }}/api/v1
