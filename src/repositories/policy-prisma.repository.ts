@@ -1,17 +1,31 @@
 import { Policy, PrismaClient } from '@prisma/client';
 
 import { PolicyRepository } from '@/interfaces/policy.repository';
+import { CacheManager } from '@/libs/shared/redis/cache-manager';
 
 export class PrismaPolicyRepository implements PolicyRepository {
   private readonly prisma: PrismaClient;
+  private readonly redis: CacheManager;
 
   constructor() {
     this.prisma = new PrismaClient();
+    this.redis = new CacheManager();
   }
 
   public async getPolicies(): Promise<Policy[]> {
     try {
-      return await this.prisma.policy.findMany();
+      const cacheKey = 'getAll/policies';
+      const cachedValue = await this.redis.getCache(cacheKey);
+
+      if (cachedValue) {
+        return JSON.parse(cachedValue);
+      }
+
+      const policies = await this.prisma.policy.findMany();
+
+      await this.redis.setCache(cacheKey, policies);
+
+      return policies;
     } catch (e) {
       throw new Error(e.message);
     }

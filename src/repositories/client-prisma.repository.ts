@@ -1,18 +1,32 @@
 import { Client, PrismaClient } from '@prisma/client';
 
-import { HttpException } from '@/exceptions/httpException';
+import { CacheManager } from '@/libs/shared/redis/cache-manager';
 import { ClientRepository } from '@/interfaces/clients.repository';
+import { HttpException } from '@/exceptions/httpException';
 
 export class PrismaClientRepository implements ClientRepository {
   private readonly prisma: PrismaClient;
+  private readonly redis: CacheManager;
 
   constructor() {
     this.prisma = new PrismaClient();
+    this.redis = new CacheManager();
   }
 
   public async getClients(): Promise<Client[]> {
     try {
-      return await this.prisma.client.findMany();
+      const cacheKey = 'getAll/clients';
+      const cachedValue = await this.redis.getCache(cacheKey);
+
+      if (cachedValue) {
+        return JSON.parse(cachedValue);
+      }
+
+      const clients = await this.prisma.client.findMany();
+
+      await this.redis.setCache(cacheKey, clients);
+
+      return clients;
     } catch (e) {
       throw new Error(e.message);
     }

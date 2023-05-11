@@ -6,6 +6,10 @@ declare global {
       HOST: string;
       PORT: number;
       BASE_URL: string;
+      REDIS_HOST: string;
+      REDIS_PORT: number;
+      REDIS_TIMEOUT: number;
+      REDIS_TTL: number;
       CLIENT_URL: string;
       CLIENTS_COMPANY_API: string;
       POLICIES_COMPANY_API: string;
