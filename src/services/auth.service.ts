@@ -2,14 +2,14 @@ import { CreateUserDto, LoginUserDto } from '@/dtos/users.dto';
 import { DataStoredInToken, TokenData } from '@/interfaces/auth.interface';
 import { compare, hash } from 'bcrypt';
 
-import { JWT_SECRET } from '@/config/environment';
 import { HttpException } from '@/exceptions/httpException';
+import { JWT_SECRET } from '@/config/environment';
 import { PrismaAuthRepository } from '@/repositories/auth-prisma.repository';
 import { User } from '@prisma/client';
 import { sign } from 'jsonwebtoken';
 
 class AuthService {
-  authRepository = new PrismaAuthRepository();
+  private authRepository = new PrismaAuthRepository();
 
   public async signup(data: CreateUserDto): Promise<User> {
     const findUser: User = await this.authRepository.getUserByEmail(data.email);

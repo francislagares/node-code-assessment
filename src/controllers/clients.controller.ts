@@ -5,7 +5,7 @@ import ClientsService from '@/services/clients.service';
 import { asyncMiddleware } from '@/middlewares/async.middleware';
 
 class ClientsController {
-  clientsService = new ClientsService();
+  private clientsService = new ClientsService();
 
   public getClients = asyncMiddleware(
     async (req: Request, res: Response): Promise<Client[]> => {

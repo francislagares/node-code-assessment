@@ -1,14 +1,14 @@
 import { Request, Response } from 'express';
 
+import AuthService from '@/services/auth.service';
 import { CreateUserDto } from '@/dtos/users.dto';
 import { RequestWithUser } from '@/interfaces/auth.interface';
-import { asyncMiddleware } from '@/middlewares/async.middleware';
-import AuthService from '@/services/auth.service';
 import { User } from '@prisma/client';
+import { asyncMiddleware } from '@/middlewares/async.middleware';
 import { validate } from 'class-validator';
 
 class AuthController {
-  public authService = new AuthService();
+  private authService = new AuthService();
 
   public signUp = asyncMiddleware(
     async (req: Request, res: Response): Promise<void> => {

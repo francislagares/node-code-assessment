@@ -1,11 +1,11 @@
-import { Role } from '@prisma/client';
 import { NextFunction, Request, Response } from 'express';
 
 import { HttpException } from '@/exceptions/httpException';
 import { PrismaAuthRepository } from '@/repositories/auth-prisma.repository';
+import { Role } from '@prisma/client';
 
 export const hasRole = (...allowedRoles: Role[]) => {
-  return async (req: Request, res: Response, next: NextFunction) => {
+  return async (req: Request, _res: Response, next: NextFunction) => {
     try {
       const { user } = req;
 

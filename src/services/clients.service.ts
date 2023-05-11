@@ -2,7 +2,7 @@ import { Client } from '@/interfaces/clients.interface';
 import { PrismaClientRepository } from '@/repositories/client-prisma.repository';
 
 class ClientsService {
-  clientsRepository = new PrismaClientRepository();
+  private clientsRepository = new PrismaClientRepository();
 
   public getClients = async (): Promise<Client[]> => {
     return await this.clientsRepository.getClients();
