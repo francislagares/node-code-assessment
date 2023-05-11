@@ -19,7 +19,7 @@ export class PrismaPolicyRepository implements PolicyRepository {
 
   public async getPolicyByClientName(clientName: string) {
     try {
-      return await this.prisma.client.findMany({
+      const client = await this.prisma.client.findMany({
         where: {
           name: clientName,
         },
@@ -38,6 +38,8 @@ export class PrismaPolicyRepository implements PolicyRepository {
           },
         },
       });
+
+      return client.flatMap(c => c.policy);
     } catch (e) {
       throw new Error(e.message);
     }
@@ -45,7 +47,7 @@ export class PrismaPolicyRepository implements PolicyRepository {
 
   public async getClientByPolicyId(policyId: string) {
     try {
-      return await this.prisma.policy.findUnique({
+      const policy = await this.prisma.policy.findUnique({
         where: {
           id: policyId,
         },
@@ -53,6 +55,8 @@ export class PrismaPolicyRepository implements PolicyRepository {
           client: true,
         },
       });
+
+      return policy?.client || null;
     } catch (e) {
       throw new Error(e.message);
     }

@@ -6,7 +6,7 @@ import { Policy } from '@/interfaces/policy.interface';
 import { asyncMiddleware } from '@/middlewares/async.middleware';
 
 class PoliciesController {
-  private policiesService = new PoliciesService();
+  policiesService = new PoliciesService();
 
   public getPolicies = asyncMiddleware(
     async (req: Request, res: Response): Promise<Policy[]> => {
@@ -24,7 +24,7 @@ class PoliciesController {
       const policies: Policy[] | null =
         await this.policiesService.getPolicyByClientName(clientName);
 
-      res.status(200).json(policies);
+      res.status(200).json({ policies });
 
       return policies;
     },
@@ -36,7 +36,7 @@ class PoliciesController {
       const client: Client | null =
         await this.policiesService.getClientByPolicyId(policyId);
 
-      res.status(200).json({ policyNumber: client });
+      res.status(200).json({ client });
 
       return client;
     },

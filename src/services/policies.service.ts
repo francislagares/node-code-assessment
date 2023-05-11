@@ -1,6 +1,6 @@
-import { ClientWithPolicyId } from '@/types/client';
 import { Policy } from '@/interfaces/policy.interface';
 import { PrismaPolicyRepository } from '@/repositories/policy-prisma.repository';
+import { Client } from '@prisma/client';
 
 class PoliciesService {
   private policiesRepository = new PrismaPolicyRepository();
@@ -15,7 +15,7 @@ class PoliciesService {
 
   public getClientByPolicyId = async (
     policyId: string,
-  ): Promise<ClientWithPolicyId | null> => {
+  ): Promise<Client | null> => {
     return await this.policiesRepository.getClientByPolicyId(policyId);
   };
 }

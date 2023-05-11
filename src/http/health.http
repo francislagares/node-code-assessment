@@ -3,4 +3,4 @@
 
 ###
 # Healthcheck
-GET {{ baseURL }}/api/v1
+GET {{ baseURL }}/api/v1/health
