@@ -1,13 +1,14 @@
-import { PrismaClient, User } from '@prisma/client';
+import { User } from '@prisma/client';
 
-import { AuthRepository } from '@/interfaces/auth.repository';
 import { CreateUserDto } from '@/dtos/users.dto';
+import { AuthRepository } from '@/interfaces/auth.repository';
+import { database } from '@/libs/shared/prisma/prisma';
 
 export class PrismaAuthRepository implements AuthRepository {
-  private readonly prisma: PrismaClient;
+  private readonly prisma: typeof database;
 
   constructor() {
-    this.prisma = new PrismaClient();
+    this.prisma = database;
   }
 
   public async getUserById(id: string): Promise<User> {

@@ -1,15 +1,16 @@
-import { Client, PrismaClient } from '@prisma/client';
+import { Client } from '@prisma/client';
 
-import { CacheManager } from '@/libs/shared/redis/cache-manager';
-import { ClientRepository } from '@/interfaces/clients.repository';
 import { HttpException } from '@/exceptions/httpException';
+import { ClientRepository } from '@/interfaces/clients.repository';
+import { database } from '@/libs/shared/prisma/prisma';
+import { CacheManager } from '@/libs/shared/redis/cache-manager';
 
 export class PrismaClientRepository implements ClientRepository {
-  private readonly prisma: PrismaClient;
+  private readonly prisma: typeof database;
   private readonly redis: CacheManager;
 
   constructor() {
-    this.prisma = new PrismaClient();
+    this.prisma = database;
     this.redis = new CacheManager();
   }
 

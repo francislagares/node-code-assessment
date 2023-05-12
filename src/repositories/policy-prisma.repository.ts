@@ -1,6 +1,7 @@
 import { Policy, PrismaClient } from '@prisma/client';
 
 import { PolicyRepository } from '@/interfaces/policy.repository';
+import { database } from '@/libs/shared/prisma/prisma';
 import { CacheManager } from '@/libs/shared/redis/cache-manager';
 
 export class PrismaPolicyRepository implements PolicyRepository {
@@ -8,7 +9,7 @@ export class PrismaPolicyRepository implements PolicyRepository {
   private readonly redis: CacheManager;
 
   constructor() {
-    this.prisma = new PrismaClient();
+    this.prisma = database;
     this.redis = new CacheManager();
   }
 
