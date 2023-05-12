@@ -11,6 +11,7 @@ Features
 - **Typescript**
 - **MongoDB**
 - **Prisma ORM**
+- **Redis in-memory cache**
 - **Swagger documentation**
 - **class-validator** for validating controller json input
 - **ES6 next features**
@@ -34,6 +35,12 @@ Prerequisites
   $ docker compose -f docker-compose-mongodb.yaml up -d                                                                                            
   ```
  
+- Right after create a Redis instance
+
+  ```bash
+  $ docker compose -f docker-compose-redis.yaml up -d                                                                                
+  ```
+  
 ## Run the Project
 ----------------
 
