@@ -1,8 +1,8 @@
 import express, { Router } from 'express';
 
-import ClientsController from '@/controllers/clients.controller';
-import authMiddleware from '@/middlewares/auth.middleware';
-import { hasRole } from '@/middlewares/role.middleware';
+import ClientsController from '@/features/clients/controllers/clients.controller';
+import authMiddleware from '@/libs/shared/middlewares/auth.middleware';
+import { hasRole } from '@/libs/shared/middlewares/role.middleware';
 
 export class ClientRoutes {
   private router: Router;

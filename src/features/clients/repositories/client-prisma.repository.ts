@@ -1,9 +1,8 @@
-import { Client } from '@prisma/client';
-
-import { HttpException } from '@/exceptions/httpException';
-import { ClientRepository } from '@/interfaces/clients.repository';
+import { ClientRepository } from '@/features/clients/interfaces/clients.repository';
+import { HttpException } from '@/libs/shared/exceptions/httpException';
 import { database } from '@/libs/shared/prisma/prisma';
 import { CacheManager } from '@/libs/shared/redis/cache-manager';
+import { Client } from '@prisma/client';
 
 export class PrismaClientRepository implements ClientRepository {
   private readonly prisma: typeof database;

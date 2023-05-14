@@ -1,8 +1,8 @@
 import express, { Router } from 'express';
 
-import PoliciesController from '@/controllers/policies.controller';
-import authMiddleware from '@/middlewares/auth.middleware';
-import { hasRole } from '@/middlewares/role.middleware';
+import PoliciesController from '@/features/policies/controllers/policies.controller';
+import authMiddleware from '@/libs/shared/middlewares/auth.middleware';
+import { hasRole } from '@/libs/shared/middlewares/role.middleware';
 
 export class PoliciesRoutes {
   private router: Router;

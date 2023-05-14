@@ -1,9 +1,9 @@
-import { Application } from 'express';
 import { BASE_URL } from '@/config/environment';
-import { authRoutes } from './auth.router';
-import { clientRoutes } from './clients.router';
-import { healthRoutes } from './health.router';
-import { policiesRoutes } from './policies.router';
+import { authRoutes } from '@/features/auth/routes/auth.router';
+import { clientRoutes } from '@/features/clients/routes/clients.router';
+import { policiesRoutes } from '@/features/policies/routes/policies.router';
+import { healthRoutes } from '@/health/health.router';
+import { Application } from 'express';
 
 const applicationRoutes = (app: Application) => {
   const routes = () => {

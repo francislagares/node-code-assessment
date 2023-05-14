@@ -1,12 +1,12 @@
 import {
   DataStoredInToken,
   RequestWithUser,
-} from '@/interfaces/auth.interface';
+} from '@/features/auth/interfaces/auth.interface';
 import { NextFunction, Response } from 'express';
 
 import { JWT_SECRET } from '@/config/environment';
-import { HttpException } from '@/exceptions/httpException';
-import { PrismaAuthRepository } from '@/repositories/auth-prisma.repository';
+import { PrismaAuthRepository } from '@/features/auth/repositories/auth-prisma.repository';
+import { HttpException } from '@/libs/shared/exceptions/httpException';
 import { verify } from 'jsonwebtoken';
 
 const authMiddleware = async (

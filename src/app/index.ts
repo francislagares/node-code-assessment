@@ -10,7 +10,7 @@ import {
 import { Application, json, urlencoded } from 'express';
 
 import { MongoDBInstance as dbConnection } from '@/config/database';
-import { ErrorMiddleware } from '@/middlewares/error.middleware';
+import { ErrorMiddleware } from '@/libs/shared/middlewares/error.middleware';
 import applicationRoutes from '@/routes/index';
 import logger from '@/utils/logger';
 import compression from 'compression';

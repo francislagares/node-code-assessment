@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 
-import { HttpException } from '@/exceptions/httpException';
-import { PrismaAuthRepository } from '@/repositories/auth-prisma.repository';
+import { PrismaAuthRepository } from '@/features/auth/repositories/auth-prisma.repository';
+import { HttpException } from '@/libs/shared/exceptions/httpException';
 import { Role } from '@prisma/client';
 
 export const hasRole = (...allowedRoles: Role[]) => {

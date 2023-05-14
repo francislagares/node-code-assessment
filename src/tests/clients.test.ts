@@ -1,6 +1,6 @@
 import { CLIENTS_COMPANY_API } from '@/config/environment';
-import { Client } from '@/interfaces/clients.interface';
-import ClientsService from '@/services/clients.service';
+import ClientsService from '@/features/clients/services/clients.service';
+import { Client } from '@prisma/client';
 import axios from 'axios';
 
 jest.mock('axios');

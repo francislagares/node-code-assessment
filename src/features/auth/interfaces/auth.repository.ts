@@ -1,4 +1,4 @@
-import { CreateUserDto } from '@/dtos/users.dto';
+import { CreateUserDto } from '@/features/auth/dtos/users.dto';
 import { User } from '@prisma/client';
 
 export interface AuthRepository {

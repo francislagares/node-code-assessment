@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 
-import { Client } from '@/interfaces/clients.interface';
-import ClientsService from '@/services/clients.service';
-import { asyncMiddleware } from '@/middlewares/async.middleware';
+import ClientsService from '@/features/clients/services/clients.service';
+import { asyncMiddleware } from '@/libs/shared/middlewares/async.middleware';
+import { Client } from '@prisma/client';
 
 class ClientsController {
   private clientsService = new ClientsService();

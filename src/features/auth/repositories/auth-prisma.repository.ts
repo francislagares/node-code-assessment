@@ -1,8 +1,7 @@
-import { User } from '@prisma/client';
-
-import { CreateUserDto } from '@/dtos/users.dto';
-import { AuthRepository } from '@/interfaces/auth.repository';
+import { CreateUserDto } from '@/features/auth/dtos/users.dto';
+import { AuthRepository } from '@/features/auth/interfaces/auth.repository';
 import { database } from '@/libs/shared/prisma/prisma';
+import { User } from '@prisma/client';
 
 export class PrismaAuthRepository implements AuthRepository {
   private readonly prisma: typeof database;

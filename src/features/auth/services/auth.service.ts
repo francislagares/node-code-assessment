@@ -1,10 +1,13 @@
-import { CreateUserDto, LoginUserDto } from '@/dtos/users.dto';
-import { DataStoredInToken, TokenData } from '@/interfaces/auth.interface';
+import { CreateUserDto, LoginUserDto } from '@/features/auth/dtos/users.dto';
+import {
+  DataStoredInToken,
+  TokenData,
+} from '@/features/auth/interfaces/auth.interface';
 import { compare, hash } from 'bcrypt';
 
-import { HttpException } from '@/exceptions/httpException';
 import { JWT_SECRET } from '@/config/environment';
-import { PrismaAuthRepository } from '@/repositories/auth-prisma.repository';
+import { PrismaAuthRepository } from '@/features/auth/repositories/auth-prisma.repository';
+import { HttpException } from '@/libs/shared/exceptions/httpException';
 import { User } from '@prisma/client';
 import { sign } from 'jsonwebtoken';
 

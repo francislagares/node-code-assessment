@@ -1,6 +1,6 @@
-import { Policy } from '@/interfaces/policy.interface';
-import { PrismaPolicyRepository } from '@/repositories/policy-prisma.repository';
-import { Client } from '@prisma/client';
+import { Client, Policy } from '@prisma/client';
+
+import { PrismaPolicyRepository } from '@/features/policies/repositories/policy-prisma.repository';
 
 class PoliciesService {
   private policiesRepository = new PrismaPolicyRepository();

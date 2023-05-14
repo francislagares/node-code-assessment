@@ -1,9 +1,8 @@
+import { Client, Policy } from '@prisma/client';
 import { Request, Response } from 'express';
 
-import { Client } from '@prisma/client';
-import PoliciesService from '@/services/policies.service';
-import { Policy } from '@/interfaces/policy.interface';
-import { asyncMiddleware } from '@/middlewares/async.middleware';
+import PoliciesService from '@/features/policies/services/policies.service';
+import { asyncMiddleware } from '@/libs/shared/middlewares/async.middleware';
 
 class PoliciesController {
   policiesService = new PoliciesService();

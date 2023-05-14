@@ -1,6 +1,6 @@
 import { Policy, PrismaClient } from '@prisma/client';
 
-import { PolicyRepository } from '@/interfaces/policy.repository';
+import { PolicyRepository } from '@/features/policies/interfaces/policy.repository';
 import { database } from '@/libs/shared/prisma/prisma';
 import { CacheManager } from '@/libs/shared/redis/cache-manager';
 

@@ -1,5 +1,5 @@
-import { Client } from '@/interfaces/clients.interface';
-import { PrismaClientRepository } from '@/repositories/client-prisma.repository';
+import { PrismaClientRepository } from '@/features/clients/repositories/client-prisma.repository';
+import { Client } from '@prisma/client';
 
 class ClientsService {
   private clientsRepository = new PrismaClientRepository();

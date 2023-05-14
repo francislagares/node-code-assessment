@@ -1,10 +1,10 @@
 import { Request, Response } from 'express';
 
-import AuthService from '@/services/auth.service';
-import { CreateUserDto } from '@/dtos/users.dto';
-import { RequestWithUser } from '@/interfaces/auth.interface';
+import { CreateUserDto } from '@/features/auth/dtos/users.dto';
+import { RequestWithUser } from '@/features/auth/interfaces/auth.interface';
+import AuthService from '@/features/auth/services/auth.service';
+import { asyncMiddleware } from '@/libs/shared/middlewares/async.middleware';
 import { User } from '@prisma/client';
-import { asyncMiddleware } from '@/middlewares/async.middleware';
 import { validate } from 'class-validator';
 
 class AuthController {
